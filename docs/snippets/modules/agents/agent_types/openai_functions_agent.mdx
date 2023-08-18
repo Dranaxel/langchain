@@ -3,7 +3,8 @@ Install openai,google-search-results packages which are required as the langchai
 >pip install openai google-search-results
 
 ```python
-from langchain import LLMMathChain, OpenAI, SerpAPIWrapper, SQLDatabase, SQLDatabaseChain
+from langchain import LLMMathChain, OpenAI, SerpAPIWrapper, SQLDatabase
+from langchain_experimental.sql import SQLDatabaseChain
 from langchain.agents import initialize_agent, Tool
 from langchain.agents import AgentType
 from langchain.chat_models import ChatOpenAI
@@ -14,7 +15,7 @@ from langchain.chat_models import ChatOpenAI
 llm = ChatOpenAI(temperature=0, model="gpt-3.5-turbo-0613")
 search = SerpAPIWrapper()
 llm_math_chain = LLMMathChain.from_llm(llm=llm, verbose=True)
-db = SQLDatabase.from_uri("sqlite:///../../../../../notebooks/Chinook.db")
+db = SQLDatabase.from_uri("sqlite:///my_db.db")
 db_chain = SQLDatabaseChain.from_llm(llm, db, verbose=True)
 tools = [
     Tool(
